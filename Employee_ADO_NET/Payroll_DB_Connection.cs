@@ -105,5 +105,31 @@ namespace Employee_ADO_NET
                 connection.Close();
             }
         }
+        //uc4 update basicpay
+
+        public void updateBasicPay()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (connection)
+                {
+                    Console.WriteLine("Enter the name of the Employee to update the basic pay:");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Enter the basic pay to update:");
+                    decimal salary = Convert.ToDecimal(Console.ReadLine());
+                    connection.Open();
+                    string query = "update employee_payroll set salary =" + salary + "where name='" + name + "'";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Records updated successfully.");
+                }
+                connection.Close();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("-------------------\nError:Records are not updated.\n-----------------");
+            }
+        }
     }
 }

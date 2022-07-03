@@ -11,6 +11,9 @@ while (choice != 0)
         case 2:
             payroll.createRecord();
             break;
+        case 3:
+            payroll.updateBasicPay();
+            break;
         default:
             Console.WriteLine("Enter the valid choice : ");
             break;
