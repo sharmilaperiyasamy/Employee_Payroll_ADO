@@ -131,5 +131,21 @@ namespace Employee_ADO_NET
                 Console.WriteLine("-------------------\nError:Records are not updated.\n-----------------");
             }
         }
+        //uc5 delete the record
+        public void deleteRecord()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            using (connection)
+            {
+                connection.Open();
+                Console.WriteLine("Enter the name of the Employee to delete the record from database.");
+                string name = Console.ReadLine();
+                string query = "delete from employee_payroll where name='" + name + "'";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                Console.WriteLine("Records are deleted successfully.");
+                connection.Close();
+            }
+        }
     }
 }
