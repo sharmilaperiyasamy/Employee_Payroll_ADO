@@ -54,5 +54,56 @@ namespace Employee_ADO_NET
                 connection.Close();
             }
         }
+        //uc3-create a new record in database
+        public void createRecord()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            using (connection)
+            {
+                connection.Open();
+                Employee_ADO_NET.Employee_Profile profile = new Employee_ADO_NET.Employee_Profile();
+                Console.WriteLine("Name of the employee: ");
+                profile.name = Console.ReadLine();
+                Console.WriteLine("Salary of the Employee : ");
+                profile.salary = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Enter the startdate : ");
+                profile.startdate = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("Gender : ");
+                profile.gender = Console.ReadLine();
+                Console.WriteLine("Phone number : ");
+                profile.phone_no = Console.ReadLine();
+                Console.WriteLine("Department : ");
+                profile.department = Console.ReadLine();
+                Console.WriteLine("Address of the Employee : ");
+                profile.address = Console.ReadLine();
+                Console.WriteLine("Basic Pay : ");
+                profile.basic_pay = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Deductions : ");
+                profile.deductions = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Taxable_pay : ");
+                profile.taxable_pay = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Income_tax : ");
+                profile.income_tax = Convert.ToDecimal(Console.ReadLine());
+                Console.WriteLine("Net_pay : ");
+                profile.net_pay = Convert.ToDecimal(Console.ReadLine());
+                SqlCommand command = new SqlCommand("SpAddEmployeeDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@name", profile.name);
+                command.Parameters.AddWithValue("@salary", profile.salary);
+                command.Parameters.AddWithValue("@startdate", profile.startdate);
+                command.Parameters.AddWithValue("@gender", profile.gender);
+                command.Parameters.AddWithValue("@phone_no", profile.phone_no);
+                command.Parameters.AddWithValue("@department", profile.department);
+                command.Parameters.AddWithValue("@address", profile.address);
+                command.Parameters.AddWithValue("@basic_pay", profile.basic_pay);
+                command.Parameters.AddWithValue("@deductions", profile.deductions);
+                command.Parameters.AddWithValue("@taxable_pay", profile.taxable_pay);
+                command.Parameters.AddWithValue("@income_tax", profile.income_tax);
+                command.Parameters.AddWithValue("@net_pay", profile.net_pay);
+                command.ExecuteNonQuery();
+                Console.WriteLine("Records are created successfully.");
+                connection.Close();
+            }
+        }
     }
 }
